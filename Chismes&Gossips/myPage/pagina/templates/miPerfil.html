@@ -1,0 +1,78 @@
+{% extends './plantilla.html' %}
+{% load static %}
+
+{% block headerHtml %}
+<link rel="stylesheet" href="{% static './css/panel.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/jdenticon@3.3.0/dist/jdenticon.min.js" async
+        integrity="sha384-LfouGM03m83ArVtne1JPk926e3SGD0Tz8XHtW2OKGsgeBU/UfR0Fa8eX+UlwSSAZ"
+        crossorigin="anonymous">
+</script>
+{% endblock %}
+
+{% block cuerpo%}
+
+<div class="container">
+    <nav class="sidebar">
+        <div class="logo">Chismes & Gossip</div>
+        <ul class="menu">
+            <a href="{% url 'panel'%}" draggable="false"><li>Inicio</li></a>
+            <a href="" draggable="false" class="enDesarrollo"><li>Explorar</li></a>
+            <a href="" draggable="false" class="enDesarrollo"><li>Tendencias</li></a>
+            <a href="{% url 'miPerfil'%}" draggable="false"><li>Perfil</li></a>
+            <a href="{% url 'logoutPage' %}" draggable="false"><li>Salir</li></a>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <div class="header">
+            <div class="iconoUsuario"> 
+            <svg width="80" height="80" data-jdenticon-value="{{idUsuario}}"></svg>
+            <h1>{{user}}</h1>
+            </div>
+        </div>
+        <div class="datosUsuario">
+            <h2>Datos</h2>
+            <legend class="email"><span class="legendTitle">Email:</span> {{email}}</legend>
+            <legend class="nombre"><span class="legendTitle">Nombre:</span> {{nombre}}</legend>
+            <legend class="apellido"><span class="legendTitle">Apellido:</span> {{apellido}}</legend>
+        </div>
+        <div class="misPublicaciones">
+            <h2>Publicaciones</h2>
+            {% if cantComentarios|add:"0" > 0 %}
+                {% for posteo in comentarios %}
+                    {% if posteo.idUsuario == idUsuario %}
+                        <div class="post">
+                            <div class="headerPost">
+                                <div class="userContainer">
+                                    <svg width="50" height="50" data-jdenticon-value="{{idUsuario}}"></svg>
+                                    <legend class="usernamePost">{{user}}</legend>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <button class="editButton" name="editButton" value="{{posteo.id}}"><i class="fa-solid fa-square-pen" style="color: #e91e63;"></i></button>
+                                    </form>
+                                    <form action="{% url 'delete' id=posteo.id %}">
+                                        <button class="editButton"><i class="fa-solid fa-square-xmark" style="color: #e91e63;"></i></button>
+                                    </form>
+                                </div>
+                                <legend class="datePost">{{posteo.fechaCreacion}}</legend>
+                            </div>
+                            <div class="contentPost">
+                                {% if posteo.id|add:"0" == editMenu|add:"0" %}
+                                <form method="post" action="{% url 'edit' id=posteo.id %}">
+                                    {% csrf_token %}
+                                    <textarea name="contenidoPosteo" placeholder="{{posteo.contenido}}" rows="4">{{posteo.contenido}}</textarea>
+                                    <button class="btn" name="btn_publicar">Editar</button>
+                                </form>
+                                {% else %}
+                                <p>{{posteo.contenido}}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% if cantComentarios|add:"0" == 0 %}
+                <h4>Sin publicaciones. Ve a publicar algo</h4>
+            {% endif %}
+        </div>
+    </main>
+    {% endblock %}

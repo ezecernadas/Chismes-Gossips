@@ -1,0 +1,62 @@
+{% extends './plantilla.html' %}
+{% load static %}
+
+{% block headerHtml %}
+<link rel="stylesheet" href="{% static './css/panel.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/jdenticon@3.3.0/dist/jdenticon.min.js" async
+        integrity="sha384-LfouGM03m83ArVtne1JPk926e3SGD0Tz8XHtW2OKGsgeBU/UfR0Fa8eX+UlwSSAZ"
+        crossorigin="anonymous">
+</script>
+{% endblock %}
+
+{% block cuerpo%}
+
+<div class="container">
+    <nav class="sidebar">
+        <div class="logo">Chismes & Gossip</div>
+        <ul class="menu">
+            <a href="{% url 'panel'%}" draggable="false"><li>Inicio</li></a>
+            <a href="" draggable="false" class="enDesarrollo"><li>Explorar</li></a>
+            <a href="" draggable="false" class="enDesarrollo"><li>Tendencias</li></a>
+            <a href="{% url 'miPerfil'%}" draggable="false"><li>Perfil</li></a>
+            <a href="{% url 'logoutPage' %}" draggable="false"><li>Salir</li></a>
+        </ul>
+    </nav>
+    <main class="main-content">
+        <h1>Bienvenido a tu pagina de chismes favorita</h1>
+        <div class="iconoUsuario"> 
+        <svg width="80" height="80" data-jdenticon-value="{{idUsuario}}"></svg>
+        </div>
+        <div class="new-post">
+            <form method="post" action="{% url 'agregarPosteo' %}">
+                {% csrf_token %}
+                <textarea name="contenidoPosteo" placeholder="¿Qué está pasando?" rows="4"></textarea>
+                <button class="btn" name="btn_publicar">Publicar</button>
+            </form>
+
+        </div>
+        <div class="posts">
+            
+            {% for posteo in comentarios %}
+            <div class="post">
+                {% for user in usuarios %}
+                        {% if posteo.idUsuario == user.id %}
+                        <div class="headerPost">
+                            <div class="userContainer">
+                                <svg width="50" height="50" data-jdenticon-value="{{user.id}}"></svg>
+                                <legend class="usernamePost">{{user.username}}</legend>
+                            </div>
+                            <legend class="datePost">{{posteo.fechaCreacion}}</legend>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                <div class="contentPost">
+                    <p>{{posteo.contenido}}</p>
+                </div>  
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+</div>
+
+{% endblock %}

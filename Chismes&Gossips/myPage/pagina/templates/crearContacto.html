@@ -1,0 +1,16 @@
+{% extends './plantilla.html' %}
+{% block cuerpo %}
+<h1>Nuevo contacto</h1>
+<a href="{% url 'home' %}">Volver</a>
+<form action="{% url 'crearContacto' %}" method="POST">
+    {% csrf_token %}
+    <label for="name">Nombre</label>
+    <input type="text" name="name">
+    <label for="surname">Apellido</label>
+    <input type="text" name="surname">
+    <label for="dni">dni</label>
+    <input type="number" name="dni">
+    <input type="submit" name="btn_ok">
+</form>
+
+{% endblock %}

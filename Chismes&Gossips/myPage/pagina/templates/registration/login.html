@@ -1,0 +1,30 @@
+{% extends '../plantilla.html' %}
+{% load static %}
+
+{% block headerHtml %}
+<link rel="stylesheet" href="{% static './css/login.css' %}">
+{% endblock %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert-message">
+            {{message}}
+        </div>    
+    {% endfor %}
+{% endif %}
+
+{% block cuerpo%}
+    <div class="container">
+        <h1>Chismes & Gossip</h1>
+        <form action="{% url 'loginPage' %}" class="form" id="login-form" autocomplete="off" method="POST">
+            {% csrf_token %}
+            <h2>Iniciar sesión</h2>
+            <input type="text" name="user" placeholder="Usuario" required>
+            <input type="password" name="pass" placeholder="Contraseña" required>
+            <button type="submit">Acceder</button>
+            <p>¿No tienes cuenta? <a href="{% url 'register' %}">Regístrate aquí</a></p>
+        </form>
+        <a href="{% url 'home' %}" class="back-button">Volver</a>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends './plantilla.html' %}   
+{% load static %}
+{% block headerHtml %}
+<link rel="stylesheet" href="{% static './css/landing.css' %}">
+{% endblock %}
+
+{% block cuerpo %}
+<header class="header">
+    <h1>Chismes & Gossip</h1>
+    <nav>
+        <a href="{% url 'loginPage' %}">Iniciar sesión</a>
+        <a href="{% url 'register' %}">Registrarse</a>
+    </nav>
+</header>
+
+<main class="main">
+    <section class="hero">
+        <h2>¡ALERTA DE CHISME!</h2>
+        <p>¡Enterate de todo, antes de que todos se enteren!</p>
+        <p>Chismes & Gossip: El lugar donde la curiosidad es la reina.</p> 
+        <p>¡Descubre los secretos mejor guardados de tus amigos, vecinos y hasta de tus idolos!</p>
+    </section>
+    
+    <section class="features">
+        <h2>Características</h2>
+        <div class="feature">
+            <h3>Comparte rumores</h3>
+            <p>Publica y comparte chismes con tu red de amigos.</p>
+        </div>
+        <div class="feature">
+            <h3>Interactúa</h3>
+            <p>Comenta y reacciona a las publicaciones de tus amigos.</p>
+        </div>
+        <div class="feature">
+            <h3>Descubre</h3>
+            <p>Explora las tendencias y los rumores más populares.</p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2024 Chismes & Gossip. Todos los derechos reservados.</p>
+</footer>
+
+{% endblock %}

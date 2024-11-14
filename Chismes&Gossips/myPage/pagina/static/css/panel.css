@@ -1,0 +1,170 @@
+:root {
+    --color-fondo: #121212;
+    --color-secundario: #E91E63;
+    --color-contraste: #FFFFFF;
+    --color-gris-oscuro: #181818;
+    --color-gris-claro: #B0BEC5;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-contraste);
+    display: flex;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--color-gris-oscuro);
+    padding: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+}
+
+.menu li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background-color: var(--color-secundario);
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.new-post {
+    background-color: var(--color-gris-oscuro);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--color-gris-claro);
+    color: var(--color-fondo);
+}
+
+.btn {
+    background-color: var(--color-secundario);
+    border: none;
+    color: var(--color-contraste);
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+}
+
+.post {
+    background-color: var(--color-gris-oscuro);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.headerPost {
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    justify-content: space-between;
+    border-bottom: solid 1px #404040;
+}
+
+.userContainer{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+.contentPost {
+    padding: .4em;
+    min-height: 3em;
+    padding-top: .6em;
+}
+
+legend.datePost {
+    color: #606060;
+}
+
+.datosUsuario {
+    margin-bottom: 1em;
+}
+
+span.legendTitle {
+    color: var(--color-secundario);
+    filter: brightness(1.2);
+    font-weight: bold;
+}
+
+button.editButton {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+button > i {
+    font-size: 20px;
+}
+
+.userContainer > form{
+    display: flex;
+    align-items: center;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.misPublicaciones > h2 {
+    margin-bottom: .4em;
+}
+
+.iconoUsuario {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.iconoUsuario >h1 {
+    color: var(--color-secundario);
+}
+
+h4 {
+    color: #404040;
+}
+
+.enDesarrollo{
+    pointer-events: none;
+    color: grey;
+}
+
+.enDesarrollo > li{
+    background-color: #202020;
+}

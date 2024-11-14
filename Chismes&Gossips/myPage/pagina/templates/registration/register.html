@@ -1,0 +1,45 @@
+{% extends '../plantilla.html' %}
+{% load static%}
+
+{% block headerHtml %}
+<link rel="stylesheet" href="{% static './css/login.css' %}">
+{% endblock %}
+
+{% block cuerpo%}
+
+{% comment %} <div class="container">
+    <h1>Chismes & Gossip</h1>
+    <form action="{% url 'register' %}" class="form" id="login-form" autocomplete="off" method="POST">
+        {% csrf_token %}
+        <h2>Registro</h2>
+        <input type="text" name="user" placeholder="Usuario" required>
+        <input type="password" name="pass" placeholder="Contraseña" required>
+        <button type="submit">Registrarse</button>
+        <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+    </form>
+    <a href="{% url 'home' %}" class="back-button">Volver</a>
+    {% if message == 'user' %}
+        <legend style="color: red;"> Ese usuario ya existe </legend>
+    {% endif %} 
+</div> {% endcomment %}
+<div class="container">
+    <h1>Chismes & Gossip</h1>
+<form method="post" action="{% url 'register' %}" class="login-form">
+    {% csrf_token %}
+    <h2>Registro</h2>
+
+    {% for campo in register_form %}
+        {{ campo }}
+    {% endfor %}
+    <br>
+    <button type="submit">Registrarse</button>
+    <p>¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión aquí</a></p>
+</form>
+
+{% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
+{% endif %}
+
+{% endblock %}
